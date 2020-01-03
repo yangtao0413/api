@@ -14,3 +14,11 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('/test/pay','Testcontroller@alipay');
+
+
+
+Route::post('/api/user/regist','Api\KekeController@regist');
+Route::post('/api/user/login','Api\KekeController@login');
