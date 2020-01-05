@@ -87,4 +87,14 @@ class KekeController extends Controller
 
         return $response;
     }
+
+    /**
+     * 获取用户列表
+     * 2020年1月2日16:32:07
+     */
+    public function userList()
+    {
+        $list = UserModel::all();
+        echo '<pre>';print_r($list->toArray());echo '</pre>';
+    }
 }
