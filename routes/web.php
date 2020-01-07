@@ -36,3 +36,7 @@ Route::get('/test/cba','Testcontroller@cba');
 
 
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
