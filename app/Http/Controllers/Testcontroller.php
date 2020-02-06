@@ -19,8 +19,8 @@ class Testcontroller extends Controller
     	$sign = '';
     	$timestamp = date('Y-m-d H:i:s');
     	$version = '1.0';
-    	$return_url = 'http://1905api.comcto.com/test/alipay/return';   //支付宝同步通知地址
-    	$notify_url = 'http://1905api.comcto.com/test/alipay/notify';   //支付宝异步通知地址
+    	$return_url = 'http://yangtao.lovewyz.top/test/alipay/return';   //支付宝同步通知地址
+    	$notify_url = 'http://yangtao.lovewyz.top/test/alipay/notify';   //支付宝异步通知地址
     	$biz_content = '';
     	//请求参数
     	$out_trade_no = time() . rand(1111,9999);
@@ -168,5 +168,60 @@ class Testcontroller extends Controller
         }
 
         echo $str;
+    }
+
+
+    public function md1()
+    {
+        echo base64_decode("VGhpcyBpcyBhbiBlbmNvZGVkIHN0cmluZw==");die;
+        echo md5($_GET['p']);die;
+        echo md5('123456abc');die;
+        $str1 = "Hello World";
+        echo $str1;echo "</br>";
+        echo md5($str1);
+        echo "<hr>";
+        $str2 = "Hello World Hello World sdlkfjslkdjflskdjfslkfdj";
+        echo $str2;echo "</br>";
+        echo md5($str2);
+    }
+    public function rsa1()
+    {
+        echo "xxxxx";echo '<hr>';
+        echo '<pre>';print_r($_GET);echo '</pre>';
+    }
+
+
+    /**
+     * 验证签名
+     */
+    public function sign1()
+    {
+        echo '<pre>';print_r($_GET);echo '</pre>';
+
+        $sign=$_GET['sign'];    //base64的签名
+        unset($_GET['sign']);
+        //字典序排序
+        ksort($_GET);
+        echo '<pre>';print_r($_GET);echo '</pre>';
+
+        //拼接字符串
+        $str="";
+        foreach ($_GET as $k => $v) {
+            $str .= $k .'='. $v . '&';
+        }
+        $str=rtrim($str,'&');
+        echo $str;echo '<hr>';
+
+        //使用公钥验签
+        $pub_key=file_get_contents(storage_path('keys/pub.key'));
+        $status=openssl_verify($str,base64_decode($sign),$pub_key,OPENSSL_ALGO_SHA256);
+        var_dump($status);
+
+        if($status)
+        {
+            echo "验签成功";
+        }else{
+            echo "验签失败";
+        }
     }
 }
