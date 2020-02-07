@@ -69,3 +69,7 @@ Route::get('/api/user/data','Api\KekeController@showData');//用户注册
 
 Route::post('/test/postman1','Api\KekeController@postman1')->middleware('filter','check.token');
 Route::get('/test/md5','Api\KekeController@md5test');
+
+
+
+Route::get('/test/postqm','Api\KekeController@postqm');

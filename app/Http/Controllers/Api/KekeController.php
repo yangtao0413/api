@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Redis;
-
 use App\Model\User;
+use GuzzleHttp\Client;
 
 class KekeController extends Controller
 {
@@ -198,5 +198,39 @@ class KekeController extends Controller
         echo $url;echo '<hr>';
         $response = file_get_contents($url);
         echo $response;
+    }
+
+
+
+    public function postqm()
+    {
+        $key = "yangtao";          
+
+        $order_info = [
+            "order_id"          => 'LN_' . mt_rand(111111,999999),
+            "order_amount"      => mt_rand(111,999),
+            "uid"               => 12345,
+            "add_time"          => time(),
+        ];
+
+        $data_json = json_encode($order_info);
+
+        //计算签名
+        $sign = md5($data_json.$key);
+
+        // post 表单（form-data）发送数据
+        $client = new Client();
+        $url = 'http://passport.1905.com/test/check2';
+        $response = $client->request("POST",$url,[
+            "form_params"   => [
+                "data"  => $data_json,
+                "sign"  => $sign
+            ]
+        ]);
+
+        //接收服务器端响应的数据
+        $response_data = $response->getBody();
+        echo $response_data;
+
     }
 }
