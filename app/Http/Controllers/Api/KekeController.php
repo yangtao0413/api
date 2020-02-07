@@ -220,7 +220,7 @@ class KekeController extends Controller
 
         // post 表单（form-data）发送数据
         $client = new Client();
-        $url = 'http://passport.1905.com/test/check2';
+        $url = 'http://passport.1905.com/test/postqm2';
         $response = $client->request("POST",$url,[
             "form_params"   => [
                 "data"  => $data_json,
