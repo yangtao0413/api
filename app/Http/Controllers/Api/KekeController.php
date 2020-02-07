@@ -185,4 +185,18 @@ class KekeController extends Controller
         // $count=Redis::incr($key);
         // echo 'count:'.$count;
     }
+
+
+    public function md5test()
+    {
+        $data = "Hai";      
+        $key = "yangtao";              
+        $signature = 'poiuytrfghjkkmn';
+        echo "要发送的数据：". $data;echo '</br>';
+        echo "签名：". $signature;echo '</br>';
+        $url = "http://passport.1905.com/test/check?data=".$data . '&signature='.$signature;
+        echo $url;echo '<hr>';
+        $response = file_get_contents($url);
+        echo $response;
+    }
 }

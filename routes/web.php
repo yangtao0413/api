@@ -29,7 +29,7 @@ Route::post('/test/alipay/notify','Alipay\PayController@notify');
 Route::get('/api/test','Api\Testcontroller@test');
 Route::post('/api/user/regist','Api\KekeController@regist');//用户注册
 Route::post('/api/user/loginn','Api\KekeController@loginn'); //用户登录
-Route::post('/test/postman1','Api\KekeController@postman1')->middleware('filter','check.token');
+
 Route::get('/api/user/list','Api\Testcontroller@userList')->middleware('filter');      //用户列表
 
 Route::get('/test/abc','Testcontroller@abc');
@@ -64,3 +64,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/api/user/reg','Api\KekeController@reg');//用户注册
 Route::post('/api/user/login','Api\KekeController@login');//用户注册
 Route::get('/api/user/data','Api\KekeController@showData');//用户注册
+
+
+
+Route::post('/test/postman1','Api\KekeController@postman1')->middleware('filter','check.token');
+Route::get('/test/md5','Api\KekeController@md5test');
