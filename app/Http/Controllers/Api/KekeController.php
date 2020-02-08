@@ -233,4 +233,19 @@ class KekeController extends Controller
         echo $response_data;
 
     }
+
+
+    public function sign3()
+    {
+       $data= "keke"; //要签名的数据
+       //计算签名
+       $path=storage_path('keys/privkey3'); //私钥的路径
+       $pkeyid=openssl_pkey_get_private("file://".$path);
+       //得到$signature
+       openssl_sign($data,$signature,$pkeyid);
+       openssl_free_key($pkeyid);
+       //base64编码 方便传输
+       $sign_str=base64_encode($signature);
+       echo "base64encode 以后的签名".$sign_str;
+    }
 }
