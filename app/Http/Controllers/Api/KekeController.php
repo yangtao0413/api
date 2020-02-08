@@ -213,7 +213,7 @@ class KekeController extends Controller
             "add_time"          => time(),
         ];
 
-        $data_json = json_encode($order_info);
+        $data_json = json_encode($order_info); 
 
         //计算签名
         $sign = md5($data_json.$key);
@@ -247,5 +247,22 @@ class KekeController extends Controller
        //base64编码 方便传输
        $sign_str=base64_encode($signature);
        echo "base64encode 以后的签名".$sign_str;
+    }
+
+
+    public function encrypt1()
+    {
+        $data=$_GET['data'];
+        echo "加密前".$data;echo '</br>';
+        $method='AES-256-CBC';
+        $key='yangtao';
+        $iv='WUSD8796IDjhkchd';
+        $enc_data=openssl_encrypt($data, $method, $key,OPENSSL_RAW_DATA,$iv);
+        echo "加密后".$enc_data;echo '</br>';
+        echo '解密';echo '</br>';
+
+        //解密
+        $dec_data=openssl_decrypt($enc_data, $method, $key,OPENSSL_RAW_DATA,$iv);
+        echo $dec_data;
     }
 }
