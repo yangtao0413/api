@@ -265,4 +265,22 @@ class KekeController extends Controller
         $dec_data=openssl_decrypt($enc_data, $method, $key,OPENSSL_RAW_DATA,$iv);
         echo $dec_data;
     }
+
+
+    public function decrypt1()
+    {
+        $data=$_GET['data'];
+        $path=storage_path('keys/privkey3');
+        $prive_key=openssl_pkey_get_private("file://".$path);
+        openssl_private_encrypt($data, $enc_data,$prive_key,OPENSSL_PKCS1_PADDING);
+
+        var_dump($enc_data);
+        echo'<hr>';
+        //发送密文
+        $base64_encode_str=base64_encode($enc_data);
+        $url='http://passport.1905.com/decrypt2?data='.urlencode($base64_encode_str);
+        echo $url;
+        file_get_contents($url); //发送请求
+
+    }
 }

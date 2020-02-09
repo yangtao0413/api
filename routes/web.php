@@ -74,4 +74,5 @@ Route::get('/test/md5','Api\KekeController@md5test');
 
 Route::get('/test/postqm','Api\KekeController@postqm');
 Route::get('/test/sign3','Api\KekeController@sign3');//私钥签名
-Route::get('/test/encrypt1','Api\KekeController@encrypt1');//私钥签名
+Route::get('/test/encrypt1','Api\KekeController@encrypt1');//对称加密
+Route::get('/test/decrypt1','Api\KekeController@decrypt1');//非对称加密
